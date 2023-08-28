@@ -12,7 +12,7 @@
 
     <h3 class="my-4">Quotes with the tag "{{ tag.name }}"</h3>
     <div class="row">
-        {% for quote in tag.quote_set.all %}
+        {% for quote in page_quotes %}
             <div class="col-md-12 mb-4">
                 <div class="card">
                     <div class="card-body">
@@ -33,5 +33,21 @@
                 </div>
             </div>
         {% endfor %}
+    </div>
+
+    <div class="pagination justify-content-center my-3">
+        {% if page_quotes.has_previous %}
+            <a href="?page=1" class="btn btn-light">&laquo; First</a>
+            <a href="?page={{ page_quotes.previous_page_number }}" class="btn btn-light">Previous</a>
+        {% endif %}
+
+        <span class="current-page mx-3">
+            Page {{ page_quotes.number }} of {{ page_quotes.paginator.num_pages }}.
+        </span>
+
+        {% if page_quotes.has_next %}
+            <a href="?page={{ page_quotes.next_page_number }}" class="btn btn-light">Next</a>
+            <a href="?page={{ page_quotes.paginator.num_pages }}" class="btn btn-light">Last &raquo;</a>
+        {% endif %}
     </div>
 {% endblock %}

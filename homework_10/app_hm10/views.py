@@ -3,7 +3,7 @@ from .forms import AuthorForm, QuoteForm
 from .models import Author, Quote, Tag
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-
+from django.core.paginator import Paginator
 
 def main(request):
     return render(request, "app_hm10/index.html", context={"title": "Homework 10"})
@@ -43,12 +43,16 @@ def add_quote(request):
 def quote_list(request):
     authors = Author.objects.all()
     quotes = Quote.objects.all()
+    paginator = Paginator(quotes, 10)
+    page_number = request.GET.get('page')  # Отримати номер поточної сторінки
+    page_quotes = paginator.get_page(page_number)
     tags = Tag.objects.annotate(usage_count=Count("quote")).order_by("-usage_count")[
         :10
     ]
     context = {
         "quotes": Quote.objects.all(),
         "tags": tags,
+        'page_quotes': page_quotes,
     }
     return render(request, "app_hm10/quote_list.html", context)
 
@@ -58,9 +62,13 @@ def author_detail(request, author_id):
     return render(request, "app_hm10/author_detail.html", {"author": author})
 
 
+
 def tag_detail(request, tag_id):
-    tag = get_object_or_404(Tag, pk=tag_id)
-    context = {
-        "tag": tag,
-    }
-    return render(request, "app_hm10/tag_detail.html", context)
+    tag = get_object_or_404(Tag, id=tag_id)
+    quotes = tag.quote_set.all().order_by('-id')  # Сортуємо по даті, або будь-якому іншому критерію
+
+    paginator = Paginator(quotes, 10)  # Показувати 10 цитат на сторінці
+    page_number = request.GET.get('page')
+    page_quotes = paginator.get_page(page_number)
+
+    return render(request, 'app_hm10/tag_detail.html', {'tag': tag, 'page_quotes': page_quotes})

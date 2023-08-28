@@ -1,0 +1,19 @@
+django-admin startproject homework_10
+cd homework_10
+
+python ./manage.py startapp app_hm10
+python ./manage.py startapp users
+
+python ./manage.py makemigrations
+python manage.py migrate
+
+
+python ./manage.py runserver
+
+
+python ./manage.py createsuperuser
+
+python manage.py --help
+python manage.py delete_data
+python manage.py import_authors
+python manage.py import_quotes

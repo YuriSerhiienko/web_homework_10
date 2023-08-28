@@ -5,7 +5,7 @@
     <div class="col-md-8">
         <h2 class="my-4">All Quotes</h2>
 
-        {% for quote in quotes %}
+        {% for quote in page_quotes %}
         <div class="card mb-4">
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
@@ -24,6 +24,22 @@
             </div>
         </div>
         {% endfor %}
+
+        <div class="pagination justify-content-center">
+            {% if page_quotes.has_previous %}
+                <a href="?page=1" class="btn btn-light">&laquo; First</a>
+                <a href="?page={{ page_quotes.previous_page_number }}" class="btn btn-light">Previous</a>
+            {% endif %}
+
+            <span class="current-page">
+                Page {{ page_quotes.number }} of {{ page_quotes.paginator.num_pages }}.
+            </span>
+
+            {% if page_quotes.has_next %}
+                <a href="?page={{ page_quotes.next_page_number }}" class="btn btn-light">Next</a>
+                <a href="?page={{ page_quotes.paginator.num_pages }}" class="btn btn-light">Last &raquo;</a>
+            {% endif %}
+        </div>
     </div>
 
     <div class="col-md-4">
@@ -39,5 +55,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
