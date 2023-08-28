@@ -1,0 +1,11 @@
+{% extends "app_hm10/base.html" %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Awesome Quotes</h1>
+    <p class="lead">Discover and share inspiring quotes from various authors.</p>
+    <hr class="my-4">
+    <p>Explore a collection of thought-provoking quotes that can ignite your creativity and motivation.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'app_hm10:quote_list' %}" role="button">Explore Quotes</a>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "app_hm10/base.html" %}
+
+{% block content %}
+    <h2 class="my-4">Tag Details</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Tag: {{ tag.name }}</h5>
+            <p class="card-text">{{ tag.description }}</p>
+        </div>
+    </div>
+
+    <h3 class="my-4">Quotes with the tag "{{ tag.name }}"</h3>
+    <div class="row">
+        {% for quote in tag.quote_set.all %}
+            <div class="col-md-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>{{ quote.text }}</p>
+                            <footer class="blockquote-footer">
+                                <a href="{% url 'app_hm10:author_detail' author_id=quote.author.id %}">
+                                    {{ quote.author.fullname }}
+                                </a>
+                            </footer>
+                        </blockquote>
+                        <ul class="list-inline mt-2">
+                            {% for tag in quote.tags.all %}
+                                <li class="list-inline-item badge bg-secondary">{{ tag.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
