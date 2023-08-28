@@ -1,0 +1,14 @@
+{% extends "app_hm10/base.html" %}
+
+{% block content %}
+    <h1>Edit your picture here</h1>
+    <form action="{% url 'app_hm10:edit' picture.id %}" method="post" >
+        {% csrf_token %}
+        <img src="/media/{{picture.path}}" width="300" height="400" class="card-img-top">
+        <div class="mb-3">
+            <label class="form-label">File description:</label>
+            <input type="text" class="form-control" value="{{picture.description}}", name="description">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

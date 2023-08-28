@@ -1,0 +1,7 @@
+{% extends "app_hm10/base.html" %}
+
+{% block content %}
+  <h2>{{ author.fullname }}</h2>
+  <p>Born: {{ author.born_date }} {{ author.born_location }}</p>
+  <p>{{ author.description }}</p>
+{% endblock %}

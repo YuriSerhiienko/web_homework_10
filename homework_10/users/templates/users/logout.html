@@ -1,0 +1,9 @@
+{% extends "app_hm10/base.html" %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1>Thank you!</h1>
+    <p class="lead">You have been successfully logged out.</p>
+    <a class="btn btn-primary" href="{% url 'app_hm10:quote_list' %}" role="button">Back to Quotes</a>
+</div>
+{% endblock %}

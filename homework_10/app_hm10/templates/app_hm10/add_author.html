@@ -1,0 +1,43 @@
+{% extends 'app_hm10/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="my-4">Add New Author</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="{{ form.fullname.id_for_label }}" class="form-label">Full Name</label>
+          {{ form.fullname }}
+          <div class="invalid-feedback">
+            {{ form.fullname.errors.as_text }}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="{{ form.born_date.id_for_label }}" class="form-label">Born Date</label>
+          {{ form.born_date }}
+          <div class="invalid-feedback">
+            {{ form.born_date.errors.as_text }}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="{{ form.born_location.id_for_label }}" class="form-label">Born Location</label>
+          {{ form.born_location }}
+          <div class="invalid-feedback">
+            {{ form.born_location.errors.as_text }}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+          {{ form.description }}
+          <div class="invalid-feedback">
+            {{ form.description.errors.as_text }}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Add Author</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

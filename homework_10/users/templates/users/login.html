@@ -1,0 +1,39 @@
+{% extends "app_hm10/base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Login</h2>
+
+            {% if messages %}
+            <div class="alert alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                <div {% if message.tags %} class="alert-{{ message.tags }}" {% endif %}>{{ message }}</div>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+
+            <form action="{% url 'users:login' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    {{ form.username }}
+                    <span class="text-danger">{{ form.username.errors.first }}</span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.password.id_for_label }}">Password:</label>
+                    {{ form.password }}
+                    <span class="text-danger">{{ form.password.errors.first }}</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
